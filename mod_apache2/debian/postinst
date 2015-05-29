@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ]; then
+    ln -sf {apache_mods_available}/luasp.load {apache_mods_enabled}/luasp.load
+    ln -sf {apache_mods_available}/luasp.conf {apache_mods_enabled}/luasp.conf
+    {apachectl} restart
+fi
+
+

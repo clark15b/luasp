@@ -1,0 +1,17 @@
+luawrapper		- simple but powerful C++ template library for embedding Lua into the host application
+luacurl			- CURL for luasp
+luajson			- JSON encode/decode library
+luamemcache		- memcached client for luasp
+luamysql		- MySQL for luasp
+luaora			- Oracle (over OCI) for luasp - oracle client and valid ORACLE_HOME needed
+			    download here:
+				http://www.oracle.com/technology/software/products/database/xe/htdocs/102xelinsoft.html
+mod_apache1_3		- luasp as Apache 1.3 module
+mod_apache2		- luasp as Apache 2 module
+
+
+Copyright (C) 2009-2015 Anton Burdinuk
+
+E-Mail: clark15b@gmail.com
+
+http://www.luasp.org

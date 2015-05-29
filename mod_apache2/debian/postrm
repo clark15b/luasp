@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    remove)
+    unlink {apache_mods_enabled}/luasp.load
+    unlink {apache_mods_enabled}/luasp.conf
+    ;;
+esac
+							

@@ -1,0 +1,1 @@
+LoadModule luasp_module {apache_modules}/mod_luasp.so

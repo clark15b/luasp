@@ -1,0 +1,7 @@
+<?var1=5?>
+
+Welcome to the luasp world
+
+<?if var1==5 then?>true<?else?><?='false'?><?end?> ;))
+
+<?print('all done')?>

@@ -1,0 +1,9 @@
+Package: lib{apache}-mod-luasp
+Version: 0.0-8{codename}
+Section: libs
+Architecture: {architecture}
+Depends: {liblua}, {apachempm}, {libcurl}, {libmysql}, {libuuid}
+Priority: optional
+Maintainer: Anton Burdinuk <shocker@mail.ru>
+Description: Lua Server Pages is an easy open source scripting language that follows the PHP syntax (http://luasp.org)
+ Build with MySQL, CURL, JSON and memcached support. Thread Safe
