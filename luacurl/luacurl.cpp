@@ -30,6 +30,7 @@ namespace libcurl
     FILE* fp=0;
 
     char proxy[uri_len]="";
+    char userpwd[uri_len]="";
 
     int timeout=0;
 
@@ -48,6 +49,7 @@ namespace libcurl
     int lua_curl_get_hdr(lua_State* L);
     int lua_curl_escape(lua_State* L);
     int lua_curl_proxy(lua_State* L);
+    int lua_curl_userpwd(lua_State* L);
     int lua_curl_logfile(lua_State* L);
     int lua_curl_timeout(lua_State* L);
 }
@@ -104,6 +106,17 @@ int libcurl::lua_curl_proxy(lua_State* L)
 
     return 0;
 }
+
+int libcurl::lua_curl_userpwd(lua_State* L)
+{
+    const char* p=luaL_checkstring(L,1);
+    
+    int n=snprintf(userpwd,sizeof(userpwd),"%s",p);
+    if(n<0 || n>=sizeof(userpwd))
+	userpwd[sizeof(userpwd)-1]=0;
+
+    return 0;
+}
 int libcurl::lua_curl_logfile(lua_State* L)
 {
     if(fp)
@@ -143,6 +156,7 @@ int luaopen_luacurl(lua_State* L)
     static const luaL_Reg lib[]=
     {
         {"proxy",libcurl::lua_curl_proxy},
+        {"userpwd",libcurl::lua_curl_userpwd},
         {"log_file",libcurl::lua_curl_logfile},
         {"timeout",libcurl::lua_curl_timeout},
         {"open",libcurl::lua_curl_open},
@@ -237,6 +251,12 @@ int libcurl::lua_curl_open(lua_State* L)
     }
 
     curl_easy_setopt(lcurl->curl,CURLOPT_URL,uri);
+
+    if(userpwd[0])
+    {
+        curl_easy_setopt(lcurl->curl,CURLOPT_HTTPAUTH,CURLAUTH_BASIC|CURLAUTH_DIGEST);
+        curl_easy_setopt(lcurl->curl,CURLOPT_USERPWD,userpwd);
+    }
 
     curl_easy_setopt(lcurl->curl,CURLOPT_WRITEFUNCTION,_write_cb);
     curl_easy_setopt(lcurl->curl,CURLOPT_WRITEDATA,&lcurl->buf);
